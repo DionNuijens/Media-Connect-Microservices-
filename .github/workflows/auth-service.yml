@@ -58,7 +58,7 @@ jobs:
     - name: Build and Push Docker image
       uses: docker/build-push-action@v6
       with:
-        context: .
-        file: ./Dockerfile
+        context: ./Auth-Service
+        file: ./Auth-Service/Dockerfile
         push: true
         tags: ${{ secrets.DOCKERHUB_USERNAME }}/auth-service:latest
