@@ -62,4 +62,4 @@ jobs:
         context: ./Social-Service
         file: ./Social-Service/Dockerfile
         push: true
-        tags: ${{ secrets.DOCKERHUB_USERNAME }}/Social-service:latest
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/social-service:latest
