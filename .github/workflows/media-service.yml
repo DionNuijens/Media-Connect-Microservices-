@@ -25,3 +25,6 @@ jobs:
 
     - name: Build Media Service
       run: mvn -f Media-Service/pom.xml clean install
+
+    - name: Run Tests
+      run: mvn -f Media-Service/pom.xml test
