@@ -47,7 +47,7 @@ jobs:
       run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -f Auth-Service/pom.xml -Dsonar.projectKey=DionNuijens_Media-Connect-AuthService
 
     - name: Build JAR with Maven
-      run: mvn clean package -DskipTests
+      run: mvn -f Auth-Service/pom.xml clean package -DskipTests
 
     - name: Log in to Docker Hub
       uses: docker/login-action@v3
