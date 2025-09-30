@@ -7,6 +7,7 @@ on:
   pull_request:
     paths:
       - 'Social-Service/**'
+  workflow_dispatch:
 
 jobs:
   build:
@@ -24,3 +25,6 @@ jobs:
 
     - name: Build Social Service
       run: mvn -f Social-Service/pom.xml clean install
+
+    - name: Run Tests
+      run: mvn -f Social-Service/pom.xml test
