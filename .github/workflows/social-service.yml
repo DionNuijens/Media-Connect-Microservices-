@@ -45,3 +45,21 @@ jobs:
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -f Social-Service/pom.xml -Dsonar.projectKey=DionNuijens_Media-Connect-SocialService
+
+
+    - name: Build JAR with Maven
+      run: mvn -f Social-Service/pom.xml clean package -DskipTests
+
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v3
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: Build and Push Docker image
+      uses: docker/build-push-action@v6
+      with:
+        context: ./Social-Service
+        file: ./Social-Service/Dockerfile
+        push: true
+        tags: ${{ secrets.DOCKERHUB_USERNAME }}/social-service:latest
