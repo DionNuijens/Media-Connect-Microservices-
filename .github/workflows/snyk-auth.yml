@@ -11,7 +11,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up JDK 25
+      - name: Set up JDK 25 and Maven
         uses: actions/setup-java@v3
         with:
           java-version: '25'
@@ -26,17 +26,11 @@ jobs:
       - name: Install Snyk CLI
         run: npm install -g snyk
 
-      - name: Authenticate Snyk
+      - name: Run Snyk
+        working-directory: ./Auth-Service
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        run: snyk auth $SNYK_TOKEN
-
-      - name: Run Snyk test
+          SNYK_MAVEN_EXECUTABLE: mvn
         run: |
-          cd Auth-Service
           snyk test
-
-      - name: Monitor project on Snyk
-        run: |
-          cd Auth-Service
           snyk monitor
