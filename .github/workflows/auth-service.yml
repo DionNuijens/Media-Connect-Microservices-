@@ -26,15 +26,15 @@ jobs:
       - name: Create JWT key files from secrets
         run: |
           mkdir -p Auth-Service/src/main/resources/jwt
-          echo "${{ secrets.JWT_PRIVATE_KEY }}" > Auth-Service/src/main/resources/jwt/app.key
-          echo "${{ secrets.JWT_PUBLIC_KEY }}" > Auth-Service/src/main/resources/jwt/app.pub
+          printf '%s\n' "${{ secrets.JWT_PRIVATE_KEY }}" > Auth-Service/src/main/resources/jwt/app.key
+          printf '%s\n' "${{ secrets.JWT_PUBLIC_KEY }}" > Auth-Service/src/main/resources/jwt/app.pub
         shell: bash
 
       - name: Create JWT test key files
         run: |
           mkdir -p Auth-Service/src/test/resources/jwt
-          echo "${{ secrets.JWT_PRIVATE_KEY }}" > Auth-Service/src/test/resources/jwt/app.key
-          echo "${{ secrets.JWT_PUBLIC_KEY }}" > Auth-Service/src/test/resources/jwt/app.pub
+          printf '%s\n' "${{ secrets.JWT_PRIVATE_KEY }}" > Auth-Service/src/test/resources/jwt/app.key
+          printf '%s\n' "${{ secrets.JWT_PUBLIC_KEY }}" > Auth-Service/src/test/resources/jwt/app.pub
         shell: bash
 
       - name: Build Auth Service
