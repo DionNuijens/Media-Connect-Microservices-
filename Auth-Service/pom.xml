@@ -127,6 +127,11 @@
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.8.10</version>
+                <configuration>
+                    <includes>
+                        <include>org/example/authservice/logic/*</include>
+                    </includes>
+                </configuration>
                 <executions>
                     <execution>
                         <goals>
