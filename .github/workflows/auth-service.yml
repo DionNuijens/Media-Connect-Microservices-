@@ -23,16 +23,17 @@ jobs:
           java-version: '25'
           distribution: 'temurin'
 
+      - name: Create JWT key files from secrets
+        run: |
+          mkdir -p Auth-Service/src/main/resources/jwt
+          echo "${{ secrets.JWT_PRIVATE_KEY }}" > Auth-Service/src/main/resources/jwt/app.key
+          echo "${{ secrets.JWT_PUBLIC_KEY }}" > Auth-Service/src/main/resources/jwt/app.pub
+        shell: bash
+
       - name: Build Auth Service
-        env:
-          JWT_PRIVATE_KEY: ${{ secrets.JWT_PRIVATE_KEY }}
-          JWT_PUBLIC_KEY: ${{ secrets.JWT_PUBLIC_KEY }}
         run: mvn -f Auth-Service/pom.xml clean install
 
       - name: Run Tests
-        env:
-          JWT_PRIVATE_KEY: ${{ secrets.JWT_PRIVATE_KEY }}
-          JWT_PUBLIC_KEY: ${{ secrets.JWT_PUBLIC_KEY }}
         run: mvn -f Auth-Service/pom.xml test
 
       - name: Cache SonarQube packages
@@ -52,14 +53,9 @@ jobs:
       - name: Build and analyze
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          JWT_PRIVATE_KEY: ${{ secrets.JWT_PRIVATE_KEY }}
-          JWT_PUBLIC_KEY: ${{ secrets.JWT_PUBLIC_KEY }}
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -f Auth-Service/pom.xml -Dsonar.projectKey=DionNuijens_Media-Connect-AuthService
 
       - name: Build JAR with Maven
-        env:
-          JWT_PRIVATE_KEY: ${{ secrets.JWT_PRIVATE_KEY }}
-          JWT_PUBLIC_KEY: ${{ secrets.JWT_PUBLIC_KEY }}
         run: mvn -f Auth-Service/pom.xml clean package -DskipTests
 
       - name: Log in to Docker Hub
