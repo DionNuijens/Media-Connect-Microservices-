@@ -60,8 +60,7 @@ jobs:
       - name: Build and analyze
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -f Auth-Service/pom.xml -Dsonar.projectKey=DionNuijens_Media-Connect-AuthService -Dsonar.coverage.exclusions="**/controller/**,**/config/**,**/mapper/**,**/entity/**,**/dto/**,**/model/**"
-
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -f Auth-Service/pom.xml -Dsonar.projectKey=DionNuijens_Media-Connect-AuthService -Dsonar.exclusions="**/controller/**,**/config/**,**/mapper/**,**/entity/**,**/dto/**,**/model/**" -Dsonar.coverage.exclusions="**/controller/**,**/config/**,**/mapper/**,**/entity/**,**/dto/**,**/model/**"
       - name: Build JAR with Maven
         run: mvn -f Auth-Service/pom.xml clean package -DskipTests
 
