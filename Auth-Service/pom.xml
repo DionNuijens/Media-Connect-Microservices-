@@ -129,7 +129,7 @@
                 <version>0.8.10</version>
                 <configuration>
                     <includes>
-                        <include>org/example/authservice/logic/*</include>
+                        <include>org/example/authservice/service/*</include>
                     </includes>
                 </configuration>
                 <executions>
