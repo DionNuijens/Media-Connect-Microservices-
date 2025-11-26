@@ -30,6 +30,13 @@ jobs:
           echo "${{ secrets.JWT_PUBLIC_KEY }}" > Auth-Service/src/main/resources/jwt/app.pub
         shell: bash
 
+      - name: Create JWT test key files
+        run: |
+          mkdir -p Auth-Service/src/test/resources/jwt
+          echo "${{ secrets.JWT_TEST_PRIVATE_KEY }}" > Auth-Service/src/test/resources/jwt/app.key
+          echo "${{ secrets.JWT_TEST_PUBLIC_KEY }}" > Auth-Service/src/test/resources/jwt/app.pub
+        shell: bash
+
       - name: Build Auth Service
         run: mvn -f Auth-Service/pom.xml install -DskipTests
 
