@@ -26,11 +26,14 @@ jobs:
       - name: Install Snyk CLI
         run: npm install -g snyk
 
+      - name: Build project
+        working-directory: ./Auth-Service
+        run: mvn clean install -DskipTests
+
       - name: Run Snyk
         working-directory: ./Auth-Service
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-          SNYK_MAVEN_EXECUTABLE: mvn
         run: |
-          snyk test
+          snyk test --debug
           snyk monitor
