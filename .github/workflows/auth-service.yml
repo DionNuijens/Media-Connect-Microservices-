@@ -56,15 +56,11 @@ jobs:
           path: ~/.m2
           key: ${{ runner.os }}-m2-${{ hashFiles('Auth-Service/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
+
       - name: Build and analyze
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: |
-          mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
-            -f Auth-Service/pom.xml \
-            -Dsonar.projectBaseDir=Auth-Service \
-            -Dsonar.projectKey=DionNuijens_Media-Connect-AuthService \
-            -Dsonar.coverage.inclusions=src/main/java/org/example/authservice/logic/**/*
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -f Auth-Service/pom.xml -Dsonar.projectKey=DionNuijens_Media-Connect-AuthService
 
       - name: Build JAR with Maven
         run: mvn -f Auth-Service/pom.xml clean package -DskipTests
