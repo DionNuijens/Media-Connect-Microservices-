@@ -38,7 +38,7 @@
         <sonar.exclusions>**/controller/**,**/config/**,**/mapper/**,**/entity/**,**/dto/**,**/model/**</sonar.exclusions>
 
         <!-- Also exclude from coverage -->
-        <sonar.coverage.exclusions>**/controller/**,**/config/**,**/mapper/**,**/entity/**,**/dto/**,**/model/**</sonar.coverage.exclusions>
+<!--        <sonar.coverage.exclusions>**/controller/**,**/config/**,**/mapper/**,**/entity/**,**/dto/**,**/model/**</sonar.coverage.exclusions>-->
     </properties>
     <dependencies>
         <dependency>
