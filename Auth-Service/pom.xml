@@ -19,15 +19,13 @@
     <description>Auth-Service</description>
 
     <properties>
-        <properties>
-            <sonar.organization>dionnuijens</sonar.organization>
-            <java.version>21</java.version>
-            <!-- Analyze all source files -->
-            <sonar.sources>src/main/java</sonar.sources>
-            <sonar.tests>src/test/java</sonar.tests>
-            <!-- Exclude from coverage only -->
-            <sonar.coverage.exclusions>**/controller/**,**/config/**,**/mapper/**,**/entity/**,**/dto/**,**/model/**</sonar.coverage.exclusions>
-        </properties>
+        <sonar.organization>dionnuijens</sonar.organization>
+        <java.version>21</java.version>
+        <!-- Analyze all source files -->
+        <sonar.sources>src/main/java</sonar.sources>
+        <sonar.tests>src/test/java</sonar.tests>
+        <!-- Exclude from coverage only -->
+        <sonar.coverage.exclusions>**/controller/**,**/config/**,**/mapper/**,**/entity/**,**/dto/**,**/model/**</sonar.coverage.exclusions>
     </properties>
     <dependencies>
         <!-- Spring Boot dependencies -->
