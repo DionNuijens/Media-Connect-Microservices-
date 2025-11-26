@@ -28,8 +28,6 @@ jobs:
           mkdir -p Auth-Service/src/main/resources/jwt
           echo "${{ secrets.JWT_PRIVATE_KEY }}" > Auth-Service/src/main/resources/jwt/app.key
           echo "${{ secrets.JWT_PUBLIC_KEY }}" > Auth-Service/src/main/resources/jwt/app.pub
-          chmod 644 Auth-Service/src/main/resources/jwt/app.key
-          chmod 644 Auth-Service/src/main/resources/jwt/app.pub
         shell: bash
 
       - name: Create JWT test key files
@@ -37,28 +35,13 @@ jobs:
           mkdir -p Auth-Service/src/test/resources/jwt
           echo "${{ secrets.JWT_PRIVATE_KEY }}" > Auth-Service/src/test/resources/jwt/app.key
           echo "${{ secrets.JWT_PUBLIC_KEY }}" > Auth-Service/src/test/resources/jwt/app.pub
-          chmod 644 Auth-Service/src/test/resources/jwt/app.key
-          chmod 644 Auth-Service/src/test/resources/jwt/app.pub
-        shell: bash
-
-      - name: Verify JWT files exist
-        run: |
-          ls -la Auth-Service/src/test/resources/jwt/
-          ls -la Auth-Service/src/main/resources/jwt/
         shell: bash
 
       - name: Build Auth Service
         run: mvn -f Auth-Service/pom.xml install -DskipTests
 
-      - name: Run Tests with Debug Output
-        run: mvn -f Auth-Service/pom.xml test -e -X 2>&1 | tee test-output.log
-
-      - name: Upload test logs on failure
-        if: failure()
-        uses: actions/upload-artifact@v4
-        with:
-          name: test-logs
-          path: test-output.log
+      - name: Run Tests
+        run: mvn -f Auth-Service/pom.xml test
 
       - name: Cache SonarQube packages
         uses: actions/cache@v4
