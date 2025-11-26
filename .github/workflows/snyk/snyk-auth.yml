@@ -1,0 +1,39 @@
+name: Auth Service Snyk Scan
+
+on:
+#  push:
+#    paths:
+#      - 'Auth-Service/**'
+#  pull_request:
+#    paths:
+#      - 'Auth-Service/**'
+  workflow_dispatch:
+
+jobs:
+  snyk:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install Snyk CLI
+        run: npm install -g snyk
+
+      - name: Authenticate Snyk
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        run: snyk auth $SNYK_TOKEN
+
+      - name: Run Snyk test
+        working-directory: ./Auth-Service
+        run: snyk test
+
+      - name: Monitor project on Snyk
+        working-directory: ./Auth-Service
+        run: snyk monitor
