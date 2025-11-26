@@ -31,7 +31,7 @@ jobs:
         shell: bash
 
       - name: Build Auth Service
-        run: mvn -f Auth-Service/pom.xml clean install
+        run: mvn -f Auth-Service/pom.xml install -DskipTests
 
       - name: Run Tests
         run: mvn -f Auth-Service/pom.xml test
