@@ -61,12 +61,12 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
-          mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+          mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:5.3.0.6276:sonar \
             -f Auth-Service/pom.xml \
             -Dsonar.projectKey=DionNuijens_Media-Connect-AuthService \
-            -Dsonar.sources=Auth-Service/src/main/java \
-            -Dsonar.tests=Auth-Service/src/test/java \
-            -Dsonar.coverage.jacoco.xmlReportPaths=Auth-Service/target/site/jacoco/jacoco.xml
+            -Dsonar.sources=src/main/java \
+            -Dsonar.tests=src/test/java \
+            -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
 
       - name: Build JAR with Maven
         run: mvn -f Auth-Service/pom.xml clean package -DskipTests
