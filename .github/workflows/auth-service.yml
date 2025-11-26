@@ -66,7 +66,8 @@ jobs:
             -Dsonar.projectKey=DionNuijens_Media-Connect-AuthService \
             -Dsonar.sources=src/main/java \
             -Dsonar.tests=src/test/java \
-            -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
+            -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml \
+            -Dsonar.branch.name=master
 
       - name: Build JAR with Maven
         run: mvn -f Auth-Service/pom.xml clean package -DskipTests
