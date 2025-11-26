@@ -1,12 +1,6 @@
 name: Auth Service Snyk Scan
 
 on:
-#  push:
-#    paths:
-#      - 'Auth-Service/**'
-#  pull_request:
-#    paths:
-#      - 'Auth-Service/**'
   workflow_dispatch:
 
 jobs:
@@ -16,6 +10,13 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+
+      - name: Set up JDK 25
+        uses: actions/setup-java@v3
+        with:
+          java-version: '25'
+          distribution: 'temurin'
+          cache: maven
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
@@ -31,9 +32,11 @@ jobs:
         run: snyk auth $SNYK_TOKEN
 
       - name: Run Snyk test
-        working-directory: ./Auth-Service
-        run: snyk test
+        run: |
+          cd Auth-Service
+          snyk test
 
       - name: Monitor project on Snyk
-        working-directory: ./Auth-Service
-        run: snyk monitor
+        run: |
+          cd Auth-Service
+          snyk monitor
