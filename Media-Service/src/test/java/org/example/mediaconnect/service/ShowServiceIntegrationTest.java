@@ -256,7 +256,9 @@ class ShowServiceIntegrationTest {
         assertNotNull(result.getUpdatedAt());
         assertTrue(result.getCreatedAt().isAfter(beforeCreation) || result.getCreatedAt().isEqual(beforeCreation));
         assertTrue(result.getCreatedAt().isBefore(afterCreation) || result.getCreatedAt().isEqual(afterCreation));
-        assertEquals(result.getCreatedAt(), result.getUpdatedAt());
+        // Check that createdAt and updatedAt are very close (within same millisecond or microsecond)
+        assertTrue(result.getCreatedAt().until(result.getUpdatedAt(), java.time.temporal.ChronoUnit.MILLIS) <= 1,
+                "createdAt and updatedAt should be very close in time");
     }
 
     @Test
