@@ -18,14 +18,15 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-                .csrf(AbstractHttpConfigurer::disable)
+                .csrf(AbstractHttpConfigurer::disable) // OK for stateless APIs
                 .authorizeHttpRequests(auth -> auth
-                        .anyRequest().permitAll() // Kong handles all authorization
+                        .anyRequest().permitAll() // Kong handles authorization
                 )
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(STATELESS))
                 .build();
     }
+
 
     @Bean
     public AuthenticationManager authenticationManager(
