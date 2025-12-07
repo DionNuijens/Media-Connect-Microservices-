@@ -1,3 +1,5 @@
+version: '3.8'  # ADDED: explicit version
+
 services:
   redis:
     image: redis:latest
@@ -8,6 +10,13 @@ services:
       - redis-data:/data
     command: ["redis-server", "--appendonly", "yes"]
     restart: unless-stopped
+    networks:
+      - local-services  # ADDED: explicit network connection
 
 volumes:
   redis-data:
+
+networks:
+  local-services:  # ADDED: define network
+    driver: bridge
+    external: true  # ADDED: marks network as external
