@@ -35,9 +35,9 @@ spec:
                 secretKeyRef:
                   name: auth-service-db-secret
                   key: password
-            - name: RABBITMQ_HOST
+            - name: SPRING_RABBITMQ_HOST
               value: "host.docker.internal"
-            - name: RABBITMQ_PORT
+            - name: SPRING_RABBITMQ_PORT
               value: "5672"
           resources:
             requests:
@@ -50,13 +50,13 @@ spec:
             httpGet:
               path: /actuator/health
               port: 8081
-            initialDelaySeconds: 30
+            initialDelaySeconds: 45
             periodSeconds: 10
           readinessProbe:
             httpGet:
               path: /actuator/health/readiness
               port: 8081
-            initialDelaySeconds: 20
+            initialDelaySeconds: 35
             periodSeconds: 5
 
 ---

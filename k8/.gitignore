@@ -1,6 +1,8 @@
 # Kubernetes secrets (never commit credentials!)
 k8s/secrets-config.yaml
 k8s/*-secret.yaml
+secrets-config.yaml
+k8/secrets-config.yaml
 
 # Environment files
 .env
