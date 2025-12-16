@@ -1,0 +1,31 @@
+groups:
+  - name: spring_boot_alerts
+    interval: 30s
+    rules:
+      - alert: HighErrorRate
+        expr: rate(http_requests_total{job="spring-boot-auth-service",status=~"5.."}[5m]) > 0.1
+        for: 5m
+        annotations:
+          summary: "High error rate on Auth Service"
+          description: "Error rate is {{ $value }} errors/sec (threshold: 0.1)"
+
+      - alert: HighMemoryUsage
+        expr: (jvm_memory_usage_bytes{job="spring-boot-auth-service",area="heap"} / jvm_memory_max_bytes{job="spring-boot-auth-service",area="heap"}) > 0.85
+        for: 5m
+        annotations:
+          summary: "High JVM memory usage on Auth Service"
+          description: "Memory usage is {{ $value | humanizePercentage }}"
+
+      - alert: ServiceDown
+        expr: up{job="spring-boot-auth-service"} == 0
+        for: 1m
+        annotations:
+          summary: "Auth Service is down"
+          description: "Auth Service has been unreachable for 1 minute"
+
+      - alert: HighRequestLatency
+        expr: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket{job="spring-boot-auth-service"}[5m])) > 1
+        for: 5m
+        annotations:
+          summary: "High request latency on Auth Service"
+          description: "95th percentile latency is {{ $value }}s (threshold: 1s)"

@@ -1,0 +1,21 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+rule_files:
+  - 'prometheus_rules.yml'
+
+scrape_configs:
+  - job_name: 'spring-boot-auth-service'
+    static_configs:
+      - targets: ['host.docker.internal:8080']
+    metrics_path: '/actuator/prometheus'
+
+  - job_name: 'spring-boot-media-service'
+    static_configs:
+      - targets: ['host.docker.internal:8081']
+    metrics_path: '/actuator/prometheus'
+
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
