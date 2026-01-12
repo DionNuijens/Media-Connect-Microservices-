@@ -1,5 +1,6 @@
 package org.example.mediaconnect.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -53,6 +54,7 @@ public class TMDBWatchProviders {
         @JsonProperty("display_priority")
         private Integer displayPriority;
 
+        @JsonIgnore
         public String getFullLogoUrl() {
             if (logoPath == null || logoPath.isEmpty()) {
                 return null;

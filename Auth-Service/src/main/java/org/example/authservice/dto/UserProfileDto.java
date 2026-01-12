@@ -5,5 +5,6 @@ import java.util.UUID;
 public record UserProfileDto(
         UUID id,
         String email,
-        String username
+        String username,
+        Boolean isPublic  // Add this field
 ) {}

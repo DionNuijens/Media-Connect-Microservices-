@@ -1,5 +1,6 @@
 package org.example.mediaconnect.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -99,6 +100,7 @@ public class TMDBShowDetail {
     }
 
     // Helper methods for full URLs
+    @JsonProperty("fullPosterUrl")
     public String getFullPosterUrl() {
         if (posterPath == null || posterPath.isEmpty()) {
             return null;
@@ -106,6 +108,8 @@ public class TMDBShowDetail {
         return "https://image.tmdb.org/t/p/w500" + posterPath;
     }
 
+
+    @JsonProperty("fullBackdropUrl")
     public String getFullBackdropUrl() {
         if (backdropPath == null || backdropPath.isEmpty()) {
             return null;

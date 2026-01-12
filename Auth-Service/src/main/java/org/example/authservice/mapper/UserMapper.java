@@ -10,7 +10,8 @@ public class UserMapper {
         return new UserProfileDto(
                 user.getId(),
                 user.getEmail(),
-                user.getUsername()
+                user.getUsername(),
+                user.getIsPublic()  // Add this
         );
     }
 }

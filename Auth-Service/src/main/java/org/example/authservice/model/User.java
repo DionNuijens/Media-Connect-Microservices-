@@ -12,7 +12,6 @@ import java.util.UUID;
 @Builder
 @Getter
 @Setter
-
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -27,4 +26,6 @@ public class User {
     @Column(nullable = false, unique = true)
     private String email;
 
+    @Column(nullable = false)
+    private Boolean isPublic = false;  // Add this field
 }

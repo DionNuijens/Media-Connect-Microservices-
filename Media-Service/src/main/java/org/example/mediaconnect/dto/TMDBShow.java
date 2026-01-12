@@ -1,5 +1,6 @@
 package org.example.mediaconnect.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -28,6 +29,7 @@ public class TMDBShow {
     @JsonProperty("fullPosterUrl")
     private String fullPosterUrl;
 
+    @JsonIgnore
     public void computeFullPosterUrl() {
         if (poster_path != null && !poster_path.isEmpty()) {
             this.fullPosterUrl = "https://image.tmdb.org/t/p/w500" + poster_path;

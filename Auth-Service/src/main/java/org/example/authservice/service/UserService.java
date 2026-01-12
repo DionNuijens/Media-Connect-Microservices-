@@ -7,7 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-//import java.util.List;
+import java.util.UUID;
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -20,5 +21,15 @@ public class UserService {
                         HttpStatus.GONE,
                         "The user account has been deleted or inactivated"
                 ));
+    }
+
+    public User updatePublicStatus(String userId, boolean isPublic) {
+        User user = userRepository.findById(UUID.fromString(userId))
+                .orElseThrow(() -> new ResponseStatusException(
+                        HttpStatus.NOT_FOUND,
+                        "User not found"
+                ));
+        user.setIsPublic(isPublic);
+        return userRepository.save(user);
     }
 }
